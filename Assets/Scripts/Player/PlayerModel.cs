@@ -1,19 +1,32 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerModel
 {
-    public float moveSpeed = 5f;
-    private Vector2 readValue;
+    private float _moveSpeed = 5f;
+    private float _verticalVelocity = 0f;
+    private bool _isSprinting = false;
 
-    public void setReadValue(Vector2 readValue)
+    public float Gravity { get; } = 9.8f;
+    public float JumpHeight { get; } = 2f;
+    public float SprintSpeed { get; } = 10f;
+    public float SprintSpeedTransition { get; } = 5f;
+    public float BaseSpeed { get; } = 5f;
+
+    public float MoveSpeed
     {
-        this.readValue = readValue;
+        get => _moveSpeed;
+        set => _moveSpeed = Mathf.Clamp(value, 0, SprintSpeed);
     }
 
-    public Vector2 getReadValue()
+    public float VerticalVelocity
     {
-        return readValue;
+        get => _verticalVelocity;
+        set => _verticalVelocity = value;
+    }
+
+    public bool IsSprinting
+    {
+        get => _isSprinting;
+        set => _isSprinting = value;
     }
 }

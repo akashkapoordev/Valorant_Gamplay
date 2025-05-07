@@ -7,11 +7,12 @@ public class PlayerView : MonoBehaviour
 {
     private PlayerInput playerInput;
     private PlayerInputAction playerInputAction;
-    PlayerController playerController;
+    private PlayerController playerController;
     public CharacterController characterController;
+    [SerializeField] CameraController cameraController;
     
 
-    private void Start()
+    private void Awake()
     {
         characterController = GetComponent<CharacterController>();
         playerInput = GetComponent<PlayerInput>();
@@ -26,11 +27,17 @@ public class PlayerView : MonoBehaviour
     {
         this.playerInputAction = inputAction;
     }
+    public PlayerInput GetInputComponent() => playerInput;
+    public PlayerInputAction GetPlayerInputAction() => playerInputAction;
 
-    public PlayerInputAction GetPlayerInputAction => playerInputAction;
     private void Update()
     {
-        playerController.Movement(playerInputAction.updateMoveValue());
+        if (playerController != null && playerInputAction != null)
+        {
+            Vector2 moveInput = playerInputAction.updateMoveValue();
+            playerController.Movement(moveInput);
+            cameraController.Turn();
+        }
     }
 
     

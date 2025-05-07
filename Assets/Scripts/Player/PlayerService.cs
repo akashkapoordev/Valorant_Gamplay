@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerService : MonoBehaviour
+public class PlayerService
 {
     private PlayerController playerController;
     private PlayerModel playerModel;
@@ -28,7 +28,7 @@ public class PlayerService : MonoBehaviour
         playerModel = new PlayerModel();
         playerController = new PlayerController(playerModel, playerView);
         playerInputAction = new PlayerInputAction();
-        playerInputAction.init(playerView.GetPlayerInputAction);
-        playerView.SetPlayerInputAction(playerView.GetPlayerInputAction);
+        playerInputAction.init(playerView.GetInputComponent());
+        playerView.SetPlayerInputAction(playerInputAction);
     }
 }

@@ -5,12 +5,12 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class CameraController : MonoBehaviour
+public class CameraController : MonoBehaviour 
 {
     private CinemachineVirtualCamera virtualCamera;
 
     private Vector2 mouseInput;
-  
+
     private float mouseSensitivity = 100f;
     private float xRotation;
 
@@ -20,14 +20,11 @@ public class CameraController : MonoBehaviour
     {
         virtualCamera = GetComponent<CinemachineVirtualCamera>();
     }
-    private void Update()
-    {
-        Turn();
-    }
+
 
     public void Turn()
     {
-        mouseInput =  GameService.Instance.playerService.getPlayerInputAction().updateCameraValue();
+        mouseInput = GameService.Instance.playerService.getPlayerInputAction().updateCameraValue();
         mouseInput.x *= mouseSensitivity * Time.deltaTime;
         mouseInput.y *= mouseSensitivity * Time.deltaTime;
 
@@ -38,7 +35,5 @@ public class CameraController : MonoBehaviour
         virtualCamera.transform.localRotation = Quaternion.Euler(xRotation, 0, 0);
 
         GameService.Instance.playerService.getPlayerView().transform.Rotate(Vector3.up * mouseInput.x);
-
-   
     }
 }
