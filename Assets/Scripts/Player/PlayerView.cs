@@ -8,8 +8,10 @@ public class PlayerView : MonoBehaviour
     PlayerController playerController;
     private PlayerInput input;
     private InputAction moveAction;
-    private Rigidbody rb;
+    public CharacterController characterController;
 
+    private Vector2 readValue;
+    
     public PlayerView()
     {
         
@@ -18,8 +20,12 @@ public class PlayerView : MonoBehaviour
     private void Awake()
     {
         input = GetComponent<PlayerInput>();
-        rb = GetComponent<Rigidbody>();
         moveAction = input.actions["Move"];
+    }
+
+    private void Start()
+    {
+        characterController = GetComponent<CharacterController>();
     }
 
     public void SetController(PlayerController playerController)
@@ -28,17 +34,21 @@ public class PlayerView : MonoBehaviour
     }
 
 
-    public void Update()
+    private void Update()
     {
-        Vector2 moveInput = moveAction.ReadValue<Vector2>();
-
-
-        rb.AddForce(playerController.Move(moveInput),ForceMode.VelocityChange);
+        GetReadValue();
+        playerController.Movement(GetReadValue());
     }
 
 
-    public void FixedUpdate()
+    public Vector2 GetReadValue()
     {
-       
+        readValue = moveAction.ReadValue<Vector2>();
+        return readValue;
     }
+
+    
+
+
+
 }
