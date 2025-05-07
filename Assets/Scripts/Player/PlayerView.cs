@@ -5,27 +5,16 @@ using UnityEngine.InputSystem;
 
 public class PlayerView : MonoBehaviour
 {
+    private PlayerInput playerInput;
+    private PlayerInputAction playerInputAction;
     PlayerController playerController;
-    private PlayerInput input;
-    private InputAction moveAction;
     public CharacterController characterController;
-
-    private Vector2 readValue;
     
-    public PlayerView()
-    {
-        
-    }
-
-    private void Awake()
-    {
-        input = GetComponent<PlayerInput>();
-        moveAction = input.actions["Move"];
-    }
 
     private void Start()
     {
         characterController = GetComponent<CharacterController>();
+        playerInput = GetComponent<PlayerInput>();
     }
 
     public void SetController(PlayerController playerController)
@@ -33,19 +22,18 @@ public class PlayerView : MonoBehaviour
         this.playerController = playerController;
     }
 
+    public void SetPlayerInputAction(PlayerInputAction inputAction)
+    {
+        this.playerInputAction = inputAction;
+    }
 
+    public PlayerInputAction GetPlayerInputAction => playerInputAction;
     private void Update()
     {
-        GetReadValue();
-        playerController.Movement(GetReadValue());
+        playerController.Movement(playerInputAction.updateMoveValue());
     }
 
-
-    public Vector2 GetReadValue()
-    {
-        readValue = moveAction.ReadValue<Vector2>();
-        return readValue;
-    }
+    
 
     
 

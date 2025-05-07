@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using Cinemachine;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -13,14 +14,8 @@ public class CameraController : MonoBehaviour
     private float mouseSensitivity = 100f;
     private float xRotation;
 
-    [SerializeField]private PlayerInput input;
     private InputAction cameraAction;
 
-    private void Awake()
-    {
-        input = GetComponent<PlayerInput>();
-        cameraAction = input.actions["Look"];
-    }
     private void Start()
     {
         virtualCamera = GetComponent<CinemachineVirtualCamera>();
@@ -32,7 +27,7 @@ public class CameraController : MonoBehaviour
 
     public void Turn()
     {
-        mouseInput = cameraAction.ReadValue<Vector2>();
+        mouseInput =  GameService.Instance.playerService.getPlayerInputAction().updateCameraValue();
         mouseInput.x *= mouseSensitivity * Time.deltaTime;
         mouseInput.y *= mouseSensitivity * Time.deltaTime;
 

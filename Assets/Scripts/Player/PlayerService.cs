@@ -6,11 +6,11 @@ public class PlayerService : MonoBehaviour
 {
     private PlayerController playerController;
     private PlayerModel playerModel;
+    private PlayerInputAction playerInputAction;
 
-   public  PlayerService(PlayerView playerView )
+    public PlayerService(PlayerView playerView)
     {
-        playerModel = new PlayerModel();
-        playerController = new PlayerController(playerModel,playerView);
+        InitializeVariables(playerView);
     }
 
     public PlayerView getPlayerView()
@@ -18,5 +18,17 @@ public class PlayerService : MonoBehaviour
         return playerController.getPlayerView();
     }
 
+    public PlayerInputAction getPlayerInputAction()
+    {
+        return playerInputAction;
+    }
 
+    private void InitializeVariables(PlayerView playerView)
+    {
+        playerModel = new PlayerModel();
+        playerController = new PlayerController(playerModel, playerView);
+        playerInputAction = new PlayerInputAction();
+        playerInputAction.init(playerView.GetPlayerInputAction);
+        playerView.SetPlayerInputAction(playerView.GetPlayerInputAction);
+    }
 }
