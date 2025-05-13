@@ -27,6 +27,7 @@ public class PlayerController
     private void GroundMovement(Vector2 input)
     {
         Vector3 move = new Vector3(input.x, 0, input.y);
+        move = playerView.transform.TransformDirection(move);
 
         float targetSpeed = playerModel.IsSprinting ? playerModel.SprintSpeed : playerModel.BaseSpeed;
         playerModel.MoveSpeed = Mathf.Lerp(playerModel.MoveSpeed, targetSpeed, playerModel.SprintSpeedTransition * Time.deltaTime);
