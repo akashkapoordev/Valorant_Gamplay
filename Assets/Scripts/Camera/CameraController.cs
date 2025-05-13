@@ -11,7 +11,7 @@ public class CameraController : MonoBehaviour
 
     private Vector2 mouseInput;
 
-    private float mouseSensitivity = 100f;
+    private float mouseSensitivity = 20f;
     private float xRotation;
 
     private InputAction cameraAction;

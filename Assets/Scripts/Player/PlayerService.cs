@@ -2,33 +2,36 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerService
+namespace Valorant.Player
 {
-    private PlayerController playerController;
-    private PlayerModel playerModel;
-    private PlayerInputAction playerInputAction;
-
-    public PlayerService(PlayerView playerView)
+    public class PlayerService
     {
-        InitializeVariables(playerView);
-    }
+        private PlayerController playerController;
+        private PlayerModel playerModel;
+        private PlayerInputAction playerInputAction;
 
-    public PlayerView getPlayerView()
-    {
-        return playerController.getPlayerView();
-    }
+        public PlayerService(PlayerView playerView)
+        {
+            InitializeVariables(playerView);
+        }
 
-    public PlayerInputAction getPlayerInputAction()
-    {
-        return playerInputAction;
-    }
+        public PlayerView getPlayerView()
+        {
+            return playerController.getPlayerView();
+        }
 
-    private void InitializeVariables(PlayerView playerView)
-    {
-        playerModel = new PlayerModel();
-        playerController = new PlayerController(playerModel, playerView);
-        playerInputAction = new PlayerInputAction();
-        playerInputAction.init(playerView.GetInputComponent());
-        playerView.SetPlayerInputAction(playerInputAction);
+        public PlayerInputAction getPlayerInputAction()
+        {
+            return playerInputAction;
+        }
+
+        private void InitializeVariables(PlayerView playerView)
+        {
+            playerModel = new PlayerModel();
+            playerController = new PlayerController(playerModel, playerView);
+            playerInputAction = new PlayerInputAction();
+            playerInputAction.init(playerView.GetInputComponent());
+            playerView.SetPlayerInputAction(playerInputAction);
+        }
     }
 }
