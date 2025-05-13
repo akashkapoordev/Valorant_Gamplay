@@ -2,7 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IFireStrategy 
+namespace Valorant.Weapon
 {
-     void Fire(Transform firePoint);
+    public interface IFireStrategy
+    {
+        void Fire(Transform firePoint, WeaponDataSO weaponDataSO);
+    }
+
 }

@@ -1,83 +1,89 @@
 using UnityEngine;
 
-public class PlayerController
+namespace Valorant.Player
 {
-    private PlayerView playerView;
-    private PlayerModel playerModel;
-
-    public PlayerController(PlayerModel playerModel, PlayerView playerView)
+    public class PlayerController
     {
-        this.playerModel = playerModel;
-        this.playerView = playerView;
+        private PlayerView playerView;
+        private PlayerModel playerModel;
 
-        playerView.SetController(this);
-
-        GameService.Instance.eventService.OnJumpPressed.AddListener(OnButtonJump);
-        GameService.Instance.eventService.OnLeftShiftPressed.AddListener(OnLeftKeyPressed);
-        GameService.Instance.eventService.OnLeftShiftReleased.AddListener(OnLeftKeyReleased);
-    }
-
-    ~PlayerController()
-    {
-        GameService.Instance.eventService.OnJumpPressed.RemoveListener(OnButtonJump);
-        GameService.Instance.eventService.OnLeftShiftPressed.RemoveListener(OnLeftKeyPressed);
-        GameService.Instance.eventService.OnLeftShiftReleased.RemoveListener(OnLeftKeyReleased);
-    }
-
-    private void GroundMovement(Vector2 input)
-    {
-        Vector3 move = new Vector3(input.x, 0, input.y);
-        move = playerView.transform.TransformDirection(move);
-
-        float targetSpeed = playerModel.IsSprinting ? playerModel.SprintSpeed : playerModel.BaseSpeed;
-        playerModel.MoveSpeed = Mathf.Lerp(playerModel.MoveSpeed, targetSpeed, playerModel.SprintSpeedTransition * Time.deltaTime);
-
-        move *= playerModel.MoveSpeed;
-        move.y = CalculateVerticalVelocity();
-
-        playerView.characterController.Move(move * Time.deltaTime);
-    }
-
-    private float CalculateVerticalVelocity()
-    {
-        if (playerView.characterController.isGrounded && playerModel.VerticalVelocity < 0)
+        public PlayerController(PlayerModel playerModel, PlayerView playerView)
         {
-            playerModel.VerticalVelocity = -1;
-        }
-        else
-        {
-            playerModel.VerticalVelocity -= playerModel.Gravity * Time.deltaTime;
+            this.playerModel = playerModel;
+            this.playerView = playerView;
+
+            playerView.SetController(this);
+
+            GameService.Instance.eventService.OnJumpPressed.AddListener(OnButtonJump);
+            GameService.Instance.eventService.OnLeftShiftPressed.AddListener(OnLeftKeyPressed);
+            GameService.Instance.eventService.OnLeftShiftReleased.AddListener(OnLeftKeyReleased);
         }
 
-        return playerModel.VerticalVelocity;
-    }
-
-    public void Movement(Vector2 input)
-    {
-        GroundMovement(input);
-    }
-
-    public PlayerView getPlayerView()
-    {
-        return playerView;
-    }
-
-    private void OnButtonJump()
-    {
-        if (playerView.characterController.isGrounded)
+        ~PlayerController()
         {
-            Debug.Log("Jumped");
-            playerModel.VerticalVelocity = Mathf.Sqrt(playerModel.JumpHeight * 2f * playerModel.Gravity);
+            GameService.Instance.eventService.OnJumpPressed.RemoveListener(OnButtonJump);
+            GameService.Instance.eventService.OnLeftShiftPressed.RemoveListener(OnLeftKeyPressed);
+            GameService.Instance.eventService.OnLeftShiftReleased.RemoveListener(OnLeftKeyReleased);
         }
+
+        private void GroundMovement(Vector2 input)
+        {
+            Vector3 move = new Vector3(input.x, 0, input.y);
+            move = playerView.transform.TransformDirection(move);
+
+            float targetSpeed = playerModel.IsSprinting ? playerModel.SprintSpeed : playerModel.BaseSpeed;
+            playerModel.MoveSpeed = Mathf.Lerp(playerModel.MoveSpeed, targetSpeed, playerModel.SprintSpeedTransition * Time.deltaTime);
+
+            move *= playerModel.MoveSpeed;
+            move.y = CalculateVerticalVelocity();
+
+            playerView.characterController.Move(move * Time.deltaTime);
+        }
+
+        private float CalculateVerticalVelocity()
+        {
+            if (playerView.characterController.isGrounded && playerModel.VerticalVelocity < 0)
+            {
+                playerModel.VerticalVelocity = -1;
+            }
+            else
+            {
+                playerModel.VerticalVelocity -= playerModel.Gravity * Time.deltaTime;
+            }
+
+            return playerModel.VerticalVelocity;
+        }
+
+        public void Movement(Vector2 input)
+        {
+            GroundMovement(input);
+        }
+
+        public PlayerView getPlayerView()
+        {
+            return playerView;
+        }
+
+        private void OnButtonJump()
+        {
+            if (playerView.characterController.isGrounded)
+            {
+                Debug.Log("Jumped");
+                playerModel.VerticalVelocity = Mathf.Sqrt(playerModel.JumpHeight * 2f * playerModel.Gravity);
+            }
+        }
+
+        private void OnLeftKeyPressed()
+        {
+            playerModel.IsSprinting = true;
+        }
+
+        private void OnLeftKeyReleased()
+        {
+            playerModel.IsSprinting = false;
+        }
+
+        
     }
 
-    private void OnLeftKeyPressed()
-    {
-        playerModel.IsSprinting = true;
-    }
-
-    private void OnLeftKeyReleased()
-    {
-        playerModel.IsSprinting = false;
-    }
 }

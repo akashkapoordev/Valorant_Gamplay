@@ -2,16 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FireStrategyFactory 
+namespace Valorant.Weapon
 {
-    public static IFireStrategy GetStrategy(FireType fireType)
+    public class FireStrategyFactory
     {
-        switch (fireType)
+        public static IFireStrategy GetStrategy(FireType fireType)
         {
-            case FireType.SingleShot:
-                return new SingleShot();
-            default:
-                return null;
+            switch (fireType)
+            {
+                case FireType.Assault:
+                    return new AssaultShot();
+                default:
+                    return null;
+            }
         }
     }
+
 }

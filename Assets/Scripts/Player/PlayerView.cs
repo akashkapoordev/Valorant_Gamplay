@@ -2,48 +2,56 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-
-public class PlayerView : MonoBehaviour
+using Valorant.Weapon;
+namespace Valorant.Player
 {
-    private PlayerInput playerInput;
-    private PlayerInputAction playerInputAction;
-    private PlayerController playerController;
-    public CharacterController characterController;
-    [SerializeField] CameraController cameraController;
-    
-
-    private void Awake()
+    public class PlayerView : MonoBehaviour
     {
-        characterController = GetComponent<CharacterController>();
-        playerInput = GetComponent<PlayerInput>();
-    }
+        private PlayerInput playerInput;
+        private PlayerInputAction playerInputAction;
+        private PlayerController playerController;
+        public CharacterController characterController;
+        [SerializeField] private CameraController cameraController;
+       public WeaponHandler weaponHandler;
 
-    public void SetController(PlayerController playerController)
-    {
-        this.playerController = playerController;
-    }
 
-    public void SetPlayerInputAction(PlayerInputAction inputAction)
-    {
-        this.playerInputAction = inputAction;
-    }
-    public PlayerInput GetInputComponent() => playerInput;
-    public PlayerInputAction GetPlayerInputAction() => playerInputAction;
-
-    private void Update()
-    {
-        if (playerController != null && playerInputAction != null)
+        private void Awake()
         {
-            Vector2 moveInput = playerInputAction.updateMoveValue();
-            playerController.Movement(moveInput);
-            cameraController.Turn();
+            characterController = GetComponent<CharacterController>();
+            playerInput = GetComponent<PlayerInput>();
         }
+
+        public void SetController(PlayerController playerController)
+        {
+            this.playerController = playerController;
+        }
+
+        public void SetPlayerInputAction(PlayerInputAction inputAction)
+        {
+            this.playerInputAction = inputAction;
+        }
+
+        public PlayerInput GetInputComponent() => playerInput;
+        public PlayerInputAction GetPlayerInputAction() => playerInputAction;
+
+        private void Update()
+        {
+            if (playerController != null && playerInputAction != null)
+            {
+                if (Mouse.current.leftButton.wasPressedThisFrame)
+                    weaponHandler.GetFireCommand().Execute();
+
+                Vector2 moveInput = playerInputAction.updateMoveValue();
+                playerController.Movement(moveInput);
+                cameraController.Turn();
+            }
+        }
+
+
+
+
+
+
     }
-
-    
-
-    
-
-
 
 }

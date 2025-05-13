@@ -1,6 +1,9 @@
-public enum FireType
+namespace Valorant.Weapon
 {
-    SingleShot,
-    Burst,
-    ShotGun
+    public enum FireType
+    {
+        Assault,
+        Burst,
+        ShotGun
+    }
 }
