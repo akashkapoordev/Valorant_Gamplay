@@ -19,4 +19,5 @@ public class WeaponDataSO : ScriptableObject
     [Header("Effects")]
     public GameObject muzzleFlashPrefab;
     public GameObject impactEffectPrefab;
+    public GameObject bulletPrefab;
 }

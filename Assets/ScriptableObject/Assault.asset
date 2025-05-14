@@ -22,3 +22,5 @@ MonoBehaviour:
   muzzleFlashPrefab: {fileID: 1336949550903370, guid: 4543ab5e3d405ec40a8d4e9aa5165030,
     type: 3}
   impactEffectPrefab: {fileID: 0}
+  bulletPrefab: {fileID: 1892413118395194230, guid: 282fcd6bbee478c44b3d3bfc47c7f2f4,
+    type: 3}

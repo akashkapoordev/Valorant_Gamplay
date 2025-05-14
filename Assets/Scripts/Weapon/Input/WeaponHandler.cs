@@ -19,10 +19,6 @@ public class WeaponHandler : MonoBehaviour
         EquipWeapon(currentWeapon);
     }
 
-    //public start WeaponHandler(Weapon startingWeapon)
-    //{
-    //    EquipWeapon(startingWeapon);
-    //}
 
     public void EquipWeapon(Weapon weapon)
     {

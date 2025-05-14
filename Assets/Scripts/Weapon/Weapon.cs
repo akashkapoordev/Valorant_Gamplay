@@ -39,6 +39,7 @@ namespace Valorant.Weapon
             fireStrategy.Fire(firePoint,muzzleTransform, dataSO);
             currentAmmo--;
             lastFireTime = Time.time;
+            Debug.Log("Current Ammo: " + currentAmmo);
         }
 
         public bool CanShoot()
@@ -61,6 +62,7 @@ namespace Valorant.Weapon
         {
             isReloading = false;
             currentAmmo = dataSO.maxAmmo;
+            Debug.Log("Reloaded: " + currentAmmo);
         }
 
         public int GetCurrentAmmo()
