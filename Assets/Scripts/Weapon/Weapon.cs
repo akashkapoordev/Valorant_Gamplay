@@ -8,6 +8,7 @@ namespace Valorant.Weapon
     {
         [SerializeField] WeaponDataSO dataSO;
         public Transform firePoint;
+        public Transform muzzleTransform;
 
         private IFireStrategy fireStrategy;
 
@@ -35,7 +36,7 @@ namespace Valorant.Weapon
         public void Fire()
         {
             if (!CanShoot()) return;
-            fireStrategy.Fire(firePoint, dataSO);
+            fireStrategy.Fire(firePoint,muzzleTransform, dataSO);
             currentAmmo--;
             lastFireTime = Time.time;
         }

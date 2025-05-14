@@ -1,18 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Valorant.Weapon;
 
-public class ReloadCommand : MonoBehaviour
+public class ReloadCommand : IInputCommand
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    private Weapon weapon;
 
-    // Update is called once per frame
-    void Update()
+    public ReloadCommand(Weapon weapon)
     {
-        
+        this.weapon = weapon;
+    }
+    public void Execute()
+    {
+        weapon.StartReload();
     }
 }

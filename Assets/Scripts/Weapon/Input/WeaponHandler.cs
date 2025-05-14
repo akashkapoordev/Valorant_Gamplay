@@ -6,6 +6,7 @@ public class WeaponHandler : MonoBehaviour
     [SerializeField] private Weapon currentWeapon;
 
     private IInputCommand fireCommand;
+    private IInputCommand reloadCommand;
 
 
     public void Start()
@@ -27,8 +28,10 @@ public class WeaponHandler : MonoBehaviour
     {
         currentWeapon = weapon;
         fireCommand = new FireCommand(currentWeapon);
+        reloadCommand = new ReloadCommand(currentWeapon);
     }
 
     public IInputCommand GetFireCommand() => fireCommand;
+    public IInputCommand GetReloadCommand() => reloadCommand;
     public Weapon GetCurrentWeapon() => currentWeapon;
 }

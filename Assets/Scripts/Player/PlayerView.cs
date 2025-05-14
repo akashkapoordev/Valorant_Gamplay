@@ -40,6 +40,8 @@ namespace Valorant.Player
             {
                 if (Mouse.current.leftButton.wasPressedThisFrame)
                     weaponHandler.GetFireCommand().Execute();
+                if (Mouse.current.rightButton.wasPressedThisFrame)
+                    weaponHandler.GetReloadCommand().Execute();
 
                 Vector2 moveInput = playerInputAction.updateMoveValue();
                 playerController.Movement(moveInput);

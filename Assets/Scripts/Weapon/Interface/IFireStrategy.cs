@@ -6,7 +6,7 @@ namespace Valorant.Weapon
 {
     public interface IFireStrategy
     {
-        void Fire(Transform firePoint, WeaponDataSO weaponDataSO);
+        void Fire(Transform firePoint,Transform muzzleTransform, WeaponDataSO weaponDataSO);
     }
 
 }
