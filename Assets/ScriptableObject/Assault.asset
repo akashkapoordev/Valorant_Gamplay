@@ -18,7 +18,7 @@ MonoBehaviour:
   fireRate: 2
   reloadTime: 2
   damage: 5
-  maxDistance: 500
+  maxDistance: 1000
   muzzleFlashPrefab: {fileID: 1336949550903370, guid: 4543ab5e3d405ec40a8d4e9aa5165030,
     type: 3}
   impactEffectPrefab: {fileID: 0}
