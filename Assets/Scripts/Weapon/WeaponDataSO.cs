@@ -11,6 +11,8 @@ public class WeaponDataSO : ScriptableObject
     public int maxAmmo = 30;
     public float fireRate = 10f;
     public float reloadTime = 2f;
+    public float bulletSpeed = 10f;
+    public float bulletSpread = 0.1f;   
 
     [Header("Damage & Range")]
     public float damage = 10f;

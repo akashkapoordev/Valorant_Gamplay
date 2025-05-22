@@ -17,7 +17,7 @@ namespace Valorant.Weapon
         private bool isReloading;
         private float reloadStartTime;
 
-        private void Awake()
+        private void Start()
         {
             fireStrategy = FireStrategyFactory.GetStrategy(dataSO.fireType);
             currentAmmo = dataSO.maxAmmo;

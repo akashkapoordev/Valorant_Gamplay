@@ -17,6 +17,8 @@ MonoBehaviour:
   maxAmmo: 30
   fireRate: 2
   reloadTime: 2
+  bulletSpeed: 10
+  bulletSpread: 1
   damage: 5
   maxDistance: 1000
   muzzleFlashPrefab: {fileID: 1336949550903370, guid: 4543ab5e3d405ec40a8d4e9aa5165030,

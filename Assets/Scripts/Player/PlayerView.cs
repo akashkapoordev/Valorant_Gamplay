@@ -48,12 +48,6 @@ namespace Valorant.Player
                 cameraController.Turn();
             }
         }
-
-
-
-
-
-
     }
 
 }

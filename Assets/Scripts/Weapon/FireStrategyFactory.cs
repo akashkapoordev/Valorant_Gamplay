@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Valorant.Bullet;
 
 namespace Valorant.Weapon
 {
@@ -11,7 +12,8 @@ namespace Valorant.Weapon
             switch (fireType)
             {
                 case FireType.Assault:
-                    return new AssaultShot();
+                    Debug.Log("Assault Shot Created");
+                    return new AssaultShot(GameService.Instance.bulletService);
                 default:
                     return null;
             }
