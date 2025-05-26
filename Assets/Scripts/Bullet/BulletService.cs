@@ -34,7 +34,9 @@ namespace Valorant.Bullet
         {
             if (impactPrefab != null)
             {
+                Debug.Log("Spawned Impact Prefab at: " + hitPoint);
                 var impact = Object.Instantiate(impactPrefab, hitPoint, Quaternion.LookRotation(hitNormal));
+                Debug.Log(impact.gameObject.name);
                 Object.Destroy(impact, 2f);
             }
         }

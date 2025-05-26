@@ -21,6 +21,12 @@ namespace Valorant.Player
             playerInput = GetComponent<PlayerInput>();
         }
 
+        private void Start()
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
+
         public void SetController(PlayerController playerController)
         {
             this.playerController = playerController;
