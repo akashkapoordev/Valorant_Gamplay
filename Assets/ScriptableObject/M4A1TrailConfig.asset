@@ -10,35 +10,44 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c70ac29b33e2e234c9749e3a5b26b765, type: 3}
-  m_Name: Trail Config
+  m_Name: M4A1TrailConfig
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: f12840f1acce5aa4b909c5627ad060ba, type: 2}
   widthCurve:
     serializedVersion: 2
     m_Curve:
     - serializedVersion: 3
-      time: 0
+      time: -0.05583191
       value: 0.05
-      inSlope: -0.015061714
-      outSlope: -0.015061714
+      inSlope: -0.02732278
+      outSlope: -0.02732278
       tangentMode: 34
       weightedMode: 0
       inWeight: 0
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.32771924
-      value: 0.045063987
-      inSlope: -0.05134564
-      outSlope: -0.05134564
+      time: 0.18439992
+      value: 0.0434362
+      inSlope: -0.0773141
+      outSlope: -0.0773141
       tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.71155196
-      value: 0.011428893
-      inSlope: -0.06371355
-      outSlope: -0.06371355
+      time: 0.36806348
+      value: 0.020054832
+      inSlope: -0.08060616
+      outSlope: -0.08060616
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.89517623
+      value: 0.0021820664
+      inSlope: -0.0274891
+      outSlope: -0.0274891
       tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334
@@ -46,8 +55,8 @@ MonoBehaviour:
     - serializedVersion: 3
       time: 0.9987224
       value: 0.00000021606684
-      inSlope: -0.03979754
-      outSlope: -0.03979754
+      inSlope: -0.021071285
+      outSlope: -0.021071285
       tangentMode: 34
       weightedMode: 0
       inWeight: 0.33333334
@@ -55,7 +64,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  duration: 0.5
+  duration: 0.1
   minVertexDistance: 0.1
   colorGradient:
     serializedVersion: 2

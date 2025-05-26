@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6ad3cca33f8d1774bbd9b1c51c6d190e, type: 3}
-  m_Name: ShootConfiguration
+  m_Name: M4A1ShootConfig
   m_EditorClassIdentifier: 
   hitMask:
     serializedVersion: 2
     m_Bits: 4294967295
-  spread: {x: 0.05, y: 0.05, z: 0.05}
+  spread: {x: 0.01, y: 0.01, z: 0.01}
   fireRate: 0.1

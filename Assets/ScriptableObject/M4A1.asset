@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 1
   gunName: M4A1
-  modelPrefab: {fileID: 8657551570773843306, guid: 8a9bfb4695818c6429c9d16692d31e24,
+  modelPrefab: {fileID: 999581280855945011, guid: 471edc30c37104c4b8f5efeb9ebc8408,
     type: 3}
-  spwanPoint: {x: 0, y: 0, z: 0}
-  spwanRotaion: {x: 0, y: 0, z: 0}
+  spwanPoint: {x: 0.522, y: -0.366, z: 0.715}
+  spwanRotaion: {x: -0.012, y: 90.591, z: 1.124}
   shootConfiguration: {fileID: 11400000, guid: 36fa91bdfdceb534db458e9185295d5a, type: 2}
   trailConfiguration: {fileID: 11400000, guid: 8e33817b34900664aae1c17adfcbb323, type: 2}

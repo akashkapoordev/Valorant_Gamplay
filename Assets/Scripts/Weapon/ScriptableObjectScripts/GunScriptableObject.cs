@@ -51,7 +51,8 @@ public class GunScriptableObject : ScriptableObject
 
             shootDirection.Normalize();
 
-            if(Physics.Raycast(
+            //Debug.DrawRay(shootSystem.transform.position, shootDirection * 100f, Color.red, 2f);
+            if (Physics.Raycast(
                 shootSystem.transform.position,
                 shootDirection,
                 out RaycastHit hit,
