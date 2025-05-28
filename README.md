@@ -1,130 +1,111 @@
-# 🔫 Modular FPS Gunplay System (Unity C#)
+# Valorant Gameplay FPS - Gun System (Unity)
 
-A scalable and cleanly architected First-Person Shooter (FPS) gunplay framework in Unity using **Command Pattern**, **Strategy Pattern**, and **ScriptableObjects**.
-
-This project showcases clean code practices, modular design, and extendability with minimal gameplay mechanics like:
-
-- Raycast Shooting  
-- Ammo & Reloading  
-- Weapon Switching  
-- Recoil & Visual Feedback  
-- Data-Driven Weapons via ScriptableObjects
+A modular and optimized first-person shooter gun system built in Unity, inspired by Valorant. This project focuses on clean code architecture, visual polish, and scalable gameplay features such as shooting, bullet visuals, and impact effects.
 
 ---
 
-## 🧠 Design Goals
+## ✨ What's New
 
-✅ Scalable and extensible  
-✅ Easy to integrate into any FPS project  
-✅ Demonstrate solid understanding of OOP and design patterns  
-✅ Separation of data and behavior using ScriptableObjects
+The original gun system was functional but lacked visual polish and performance optimizations. This new version has been **rebuilt from scratch** with:
 
----
-
-## 🧱 Architecture Overview
-
-```
-[InputSystem] → [FireCommand.Execute()]
-               ↓
-         [Weapon.Fire()]
-               ↓
-  [FireStrategyFactory.GetStrategy()]
-               ↓
-  [SingleShotFire / BurstFire / ShotgunFire]
-               ↓
-       → Raycast, VFX, Target Hit
-```
+* ScriptableObjects for modular weapon data
+* TrailRenderer bullets for tracer effects
+* Particle-based muzzle flashes
+* Impact visuals on hit
+* Object Pooling (Unity 2021+) for bullet trails
+* Strategy Pattern for fire behavior types
 
 ---
 
-## 🧩 Design Patterns Used
+## 🔊 Features
 
-| Pattern            | Purpose |
-|--------------------|---------|
-| 🎮 **Command**      | Encapsulates user actions like fire, reload, switch weapon |
-| 🧠 **Strategy**     | Handles different firing behaviors (single, burst, shotgun) |
-| 🧾 **ScriptableObject** | Stores data-driven weapon stats (fire rate, damage, ammo) |
-| 🏭 **Factory**      | Returns correct fire behavior based on `FireType` enum |
-| 🔄 **Service Locator (optional)** | Central access to recoil, audio, VFX services |
+### 🔧 Modular Architecture
+
+* Each weapon uses a `WeaponDataSO` ScriptableObject
+* Clean separation of input, logic, and visuals
+
+### 🔫 Realistic Bullet Behavior
+
+* Raycast for accurate and immediate hit detection
+* Tracer effect using a trail renderer (not Rigidbody physics)
+* Impact effect instantiated at hit point
+
+### ⚖️ Performance-Ready
+
+* Uses `ObjectPool<T>` (UnityEngine.Pool) to pool TrailRenderers
+* Avoids runtime `Instantiate()`/`Destroy()` spikes
+
+### 🔍 Extensible Gun Types
+
+* Strategy Pattern (`IFireStrategy`) allows adding different firing behaviors
+* Easily extendable to add semi-auto, burst, and auto fire types
 
 ---
 
-## 📁 Folder Structure
+## 📂 Project Structure
 
 ```
 Assets/
 ├── Scripts/
-│   ├── Input/
-│   │   ├── IInputCommand.cs
-│   │   ├── FireCommand.cs
-│   │   ├── ReloadCommand.cs
-│   │   └── InputHandler.cs
 │   ├── Weapon/
 │   │   ├── Weapon.cs
-│   │   ├── WeaponDataSO.cs
+│   │   ├── FireCommand.cs
+│   │   ├── FireStrategyFactory.cs
 │   │   ├── IFireStrategy.cs
-│   │   ├── SingleShotFire.cs
-│   │   └── FireStrategyFactory.cs
-│   ├── Player/
-│   │   ├── PlayerModel.cs
-│   │   ├── PlayerView.cs
-│   │   └── PlayerController.cs
-│   ├── Systems/
-│   │   └── WeaponManager.cs
+│   │   └── WeaponDataSO.cs
+│   ├── Bullet/
+│   │   ├── BulletService.cs
+│   │   └── BulletMover.cs
+│   └── Player/
+│       └── PlayerView.cs
 ├── Prefabs/
 │   ├── Weapons/
+│   ├── BulletTrail/
+│   └── Effects/
 ├── ScriptableObjects/
 │   └── WeaponData/
 ```
 
 ---
 
-## 🔧 How to Use
+## 🔢 How It Works
 
-1. **Create WeaponDataSO**:
-   - Right-click in `ScriptableObjects/WeaponData/`
-   - `Create → Weapons → Weapon Data`
-   - Fill in weapon stats and visuals
-
-2. **Create Weapon Prefab**:
-   - Add `Weapon.cs`
-   - Assign `WeaponDataSO` and `firePoint`
-
-3. **Attach to Player**:
-   - Add a `GunHolder` under Camera
-   - Drag weapon prefab into it
-
-4. **Use InputHandler**:
-   - Assign `WeaponManager` or direct `Weapon` reference
-   - Fire using mouse input (e.g. `FireCommand`)
+1. Player input is captured using Unity's Input System
+2. Weapon retrieves its fire behavior from ScriptableObject
+3. Performs raycast to detect hit
+4. TrailRenderer is spawned and animated toward hit point
+5. Muzzle flash and impact effects are shown
+6. Everything except raycast is handled visually (no physics)
 
 ---
 
-## 📌 Features Implemented
+## 🔝 Built With
 
-- [x] FPS movement and camera
-- [x] Raycast shooting
-- [x] Muzzle and impact VFX
-- [x] Ammo + reload system
-- [x] ScriptableObject-based weapon data
-- [x] Weapon switching via number keys
-- [x] Clean architecture (Command + Strategy)
-
----
-
-## 📚 Credits
-
-Created by **Akash Kapoor**  
-Powered by Unity Engine  
-Architecture inspired by SOLID principles and real-world AAA systems
+* Unity 2021.3+
+* C#
+* Unity Input System
+* ScriptableObject architecture
+* TrailRenderer & ParticleSystem
+* UnityEngine.Pool (Object Pooling)
 
 ---
 
-## 📈 Future Improvements
+## 🙏 Acknowledgements
 
-- ✅ Enemy AI with hit response  
-- ✅ UI integration for ammo/weapon  
-- ✅ Advanced firing modes (charge-up, spread, etc.)  
-- ✅ Multiplayer adaptation using Photon or Netcode
+* 🎩 [**LlamAcademy**](https://www.youtube.com/c/LlamAcademy) — For the gun system design and tutorials
+* 🚀 [**Outscal**](https://outscal.com) — For mentorship and teaching clean game architecture
 
 ---
+
+## 🔍 Next Steps
+
+* Add player abilities (e.g. smoke, dash)
+* UI for ammo count and reload
+* Sound FX integration (shoot, reload)
+* Weapon switching system
+
+---
+
+## 🔖 License
+
+MIT License — Free to use, modify, and distribute.
