@@ -11,6 +11,7 @@ public class GunScriptableObject : ScriptableObject
     public GameObject modelPrefab;
     public Vector3 spwanPoint;
     public Vector3 spwanRotaion;
+    public ParticleSystem impactEffect;
 
 
     public ShootConfigurationSo shootConfiguration;
@@ -64,7 +65,7 @@ public class GunScriptableObject : ScriptableObject
                     PlayTrail(
                         shootSystem.transform.position,
                         hit.point,
-                        hit
+                        hit,true
                         )
                 );
             }
@@ -74,14 +75,14 @@ public class GunScriptableObject : ScriptableObject
                     PlayTrail(
                    shootSystem.transform.position,
                    shootSystem.transform.position + (shootDirection * trailConfiguration.missDistance),
-                   new RaycastHit()
+                   new RaycastHit(),false
                     )
                 );
             }
         }
     }
 
-    private IEnumerator PlayTrail(Vector3 startPoint,Vector3 endPoint,RaycastHit hit)
+    private IEnumerator PlayTrail(Vector3 startPoint,Vector3 endPoint,RaycastHit hit ,bool impact)
     {
         TrailRenderer instance = trailPool.Get();
         instance.gameObject.SetActive(true);
@@ -99,11 +100,10 @@ public class GunScriptableObject : ScriptableObject
         }
 
         instance.transform.position = endPoint;
-
-        //if(hit.collider != null)
-        //{
-        //    //Later we can add logic to handle hit effects, like spawning decals or playing sounds
-        //}
+        if(impact)
+        {
+            Instantiate(impactEffect, endPoint, Quaternion.LookRotation(hit.normal));
+        }
 
 
         yield return new WaitForSeconds(trailConfiguration.duration);
